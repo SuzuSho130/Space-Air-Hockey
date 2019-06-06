@@ -29,6 +29,7 @@ public class StrikerController: MonoBehaviour {
 		ChangeSpeed (scroll);
 		currentMousePosition = Input.mousePosition;
 		Move ();
+		
 	}
 
 	private void Move() {
@@ -36,6 +37,10 @@ public class StrikerController: MonoBehaviour {
 		position.z = position.y-250.0f/speed;
 
 		_rb.MovePosition(position*speed);
+		Vector3 player_pos = transform.position;
+		player_pos.x = Mathf.Clamp(player_pos.x, -135, 135);
+		player_pos.z = Mathf.Clamp(player_pos.z, -300, 0);
+		transform.position = player_pos;
 	}
 		
 	private void ChangeSpeed(float scroll) {

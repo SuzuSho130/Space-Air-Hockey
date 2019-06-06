@@ -22,9 +22,11 @@ public class CPUControllor : MonoBehaviour
 
     private void Move()
     {
-        // Vector3 pos = new Vector3(Puck.transform.position.x,0f,transform.position.z);
-        Vector3 pos = new Vector3(Puck.transform.position.x * speed,0f,transform.position.z);
-        
+        Vector3 pos = new Vector3(Puck.transform.position.x * speed,0f,transform.position.z); 
         _rb.MovePosition(pos);
+        Vector3 player_pos = transform.position;
+        player_pos.x = Mathf.Clamp(player_pos.x, -135, 135);
+        player_pos.z = Mathf.Clamp(player_pos.z, 0, 300);
+        transform.position = player_pos;
     }
 }
