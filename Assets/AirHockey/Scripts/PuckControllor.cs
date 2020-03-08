@@ -1,6 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+/*
+packの動きを制御するスクリプト
+*/
 
 public class PuckControllor : MonoBehaviour
 {
