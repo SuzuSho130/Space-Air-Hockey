@@ -12,6 +12,7 @@ public class PuckControllor : MonoBehaviour
         Vector3 player_pos = transform.position;
         player_pos.x = Mathf.Clamp(player_pos.x, -140, 140);
         player_pos.z = Mathf.Clamp(player_pos.z, -330, 330);
+        player_pos.y = 0;
         transform.position = player_pos;
     }
 }
