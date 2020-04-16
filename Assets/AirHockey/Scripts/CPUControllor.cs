@@ -29,19 +29,16 @@ public class CPUControllor : MonoBehaviour
         if (Puck.transform.position.z <= 0)
         {
             ReturnMove();
-            Debug.Log("R");
         }
         else
         {
             if (Puck.transform.position.z - transform.position.z <= 0)
             {
                 AttackMove();
-            Debug.Log("A");
             }
             else
             {
                 DeffenceMove();
-                Debug.Log("D");
             }
         }
         PositionRestriction();
