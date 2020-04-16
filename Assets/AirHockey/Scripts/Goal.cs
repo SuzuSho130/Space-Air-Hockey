@@ -29,13 +29,18 @@ public class Goal : MonoBehaviour {
 	*/
 	void OnTriggerEnter (Collider other)
 	{
-		string layerName = LayerMask.LayerToName(other.gameObject.layer);
-		if( layerName == "Puck")
+		if(other.transform.tag == "Puck")
 		{
 			scoreCount++;
 			ResetPuck ();
 			_score.GetComponent<Text> ().text = scoreCount.ToString();
-		}
+        }
+        if (other.transform.tag == "MiniPuck")
+        {
+            scoreCount++;
+            _score.GetComponent<Text>().text = scoreCount.ToString();
+			Destroy(other.gameObject);
+        }
 	}
 	
 	/* packの再配置する関数 */
