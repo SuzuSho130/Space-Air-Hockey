@@ -12,6 +12,7 @@ public class Goal : MonoBehaviour {
 	private Rigidbody _rb;
 	private int scoreCount = 0;
 	private Vector3 puckPosition;
+	public GameObject GameManager;
 
 	void Start() {
 		_rb = puck.GetComponent<Rigidbody>();
@@ -32,6 +33,7 @@ public class Goal : MonoBehaviour {
 		if(other.transform.tag == "Puck")
 		{
 			scoreCount++;
+			GameManager.GetComponent<GameManager>().Reset();
 			ResetPuck ();
 			_score.GetComponent<Text> ().text = scoreCount.ToString();
         }

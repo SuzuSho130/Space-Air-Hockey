@@ -97,4 +97,10 @@ public class CPUControllor : MonoBehaviour
         player_pos.z = Mathf.Clamp(player_pos.z, 0, 300);
         transform.position = player_pos;
     }
+
+    public void ResetPosition()
+    {
+        Debug.Log("Reset");
+        transform.position = init_position;
+    }
 }
