@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public GameObject mini_pack;
     public Vector2 field_size;
     public GameObject CPUContorollor;
+    public GameObject ResultMenu;
+    public float timer = 100.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,19 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (GameTimer())
+        {
+            Time.timeScale = 0f;
+            ResultMenu.SetActive(true);
+        }
+    }
+
+    private bool GameTimer()
+    {
+        Debug.Log(timer);
+        timer -= Time.deltaTime;
+        if(timer <= 0) return true;
+        else return false;
     }
 
     public void Reset()
