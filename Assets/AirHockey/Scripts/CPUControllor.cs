@@ -100,7 +100,6 @@ public class CPUControllor : MonoBehaviour
 
     public void ResetPosition()
     {
-        Debug.Log("Reset");
         transform.position = init_position;
     }
 }

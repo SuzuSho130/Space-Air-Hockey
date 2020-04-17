@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     private bool GameTimer()
     {
-        Debug.Log(timer);
         timer -= Time.deltaTime;
         timer_slider.value = timer;
         if(timer <= 0) return true;
@@ -110,5 +110,10 @@ public class GameManager : MonoBehaviour
         result_menu.transform.Find("ResultText").GetComponent<Text>().text = result;
         result_menu.transform.Find("ResultText").GetComponent<Text>().color = color;
         result_menu.transform.Find("PlayerScoreValueText").GetComponent<Text>().text = score.ToString();
+    }
+
+    public void PushButtonTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 }
