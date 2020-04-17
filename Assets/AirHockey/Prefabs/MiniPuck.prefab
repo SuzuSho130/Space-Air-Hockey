@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1422902764788976824}
   - component: {fileID: 6433454083850665062}
   - component: {fileID: 7193292137891689002}
-  - component: {fileID: 2833124133738611089}
+  - component: {fileID: 3460142593479119238}
   m_Layer: 8
   m_Name: MiniPuck
   m_TagString: MiniPuck
@@ -112,7 +112,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2833124133738611089
+--- !u!114 &3460142593479119238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3072137842812418940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55adc0ef3877b4dffa3a6174ea385968, type: 3}
+  m_Script: {fileID: 11500000, guid: 91e1a5bbcdef48e4fae38349f1fdedd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 20

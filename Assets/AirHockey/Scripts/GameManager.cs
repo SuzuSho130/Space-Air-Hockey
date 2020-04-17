@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         StartCoroutine("ShootingStarTimer");
         player_score_text = ui_object.transform.Find("PlayerScore").GetComponent<Text>();
         enemy_score_text = ui_object.transform.Find("EnemyScore").GetComponent<Text>();
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
         float timer;
         while (true)
         {
-            timer = Random.Range(30.0f, 60.0f);
+            timer = Random.Range(20.0f, 40.0f);
             yield return new WaitForSeconds(timer);
             int count = Random.Range(5, 30);
             StartCoroutine(ShootingStar(count));

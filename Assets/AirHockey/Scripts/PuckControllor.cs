@@ -9,6 +9,11 @@ public class PuckControllor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Move();
+    }
+
+    public void Move()
+    {
         Vector3 player_pos = transform.position;
         player_pos.x = Mathf.Clamp(player_pos.x, -140, 140);
         player_pos.z = Mathf.Clamp(player_pos.z, -330, 330);
