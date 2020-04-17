@@ -8,9 +8,12 @@ public class GameManager : MonoBehaviour
     public GameObject mini_pack;
     public Vector2 field_size;
     public GameObject CPUContorollor;
-    public GameObject ResultMenu;
-    public GameObject player_score_object;
-    public GameObject enemy_score_object;
+    public GameObject ui_object;
+    public GameObject result_menu;
+    Text player_score_text;
+    Text enemy_score_text;
+    Slider timer_slider;
+
     public float timer = 100.0f;
     private int player_score = 0;
     private int enemy_score = 0;
@@ -19,7 +22,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine("ShootingStarTimer");
-        
+        player_score_text = ui_object.transform.Find("PlayerScore").GetComponent<Text>();
+        enemy_score_text = ui_object.transform.Find("EnemyScore").GetComponent<Text>();
+        timer_slider = ui_object.transform.Find("Timer").GetComponent<Slider>();
+        timer_slider.maxValue = timer;
     }
 
     void Update()
@@ -27,7 +33,7 @@ public class GameManager : MonoBehaviour
         if (GameTimer())
         {
             Time.timeScale = 0f;
-            ResultMenu.SetActive(true);
+            Result();
         }
     }
 
@@ -35,6 +41,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(timer);
         timer -= Time.deltaTime;
+        timer_slider.value = timer;
         if(timer <= 0) return true;
         else return false;
     }
@@ -70,12 +77,38 @@ public class GameManager : MonoBehaviour
         if (power)
         {
             player_score += value;
-            player_score_object.GetComponent<Text>().text = player_score.ToString();
+            player_score_text.text = player_score.ToString();
         }
         else
         {
             enemy_score += value;
-            enemy_score_object.GetComponent<Text>().text = enemy_score.ToString();
+            enemy_score_text.text = enemy_score.ToString();
         }
+    }
+
+    private void Result()
+    {
+        int score = enemy_score - player_score;
+        string result = "";
+        Color color;
+        if (score > 0)
+        {
+            result = "Win";
+            color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        }
+        else if (score == 0)
+        {
+            result = "Draw";
+            color = new Color(1.0f, 1.0f, 0.0f, 1.0f);
+        }
+        else 
+        {
+            result = "Lose";
+            color = new Color(0.0f, 0.0f, 6.0f, 1.0f);
+        }
+        result_menu.SetActive(true);
+        result_menu.transform.Find("ResultText").GetComponent<Text>().text = result;
+        result_menu.transform.Find("ResultText").GetComponent<Text>().color = color;
+        result_menu.transform.Find("PlayerScoreValueText").GetComponent<Text>().text = score.ToString();
     }
 }
