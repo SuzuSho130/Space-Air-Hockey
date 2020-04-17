@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 /*
 packがゴールに入って場合にスコア計算を行うスクリプト
@@ -7,10 +6,9 @@ packがゴールに入って場合にスコア計算を行うスクリプト
 
 public class Goal : MonoBehaviour {
 
-	public GameObject _score;
+	public bool power;
 	public GameObject puck;
 	private Rigidbody _rb;
-	private int scoreCount = 0;
 	private Vector3 puckPosition;
 	public GameObject GameManager;
 
@@ -30,17 +28,16 @@ public class Goal : MonoBehaviour {
 	*/
 	void OnTriggerEnter (Collider other)
 	{
+		GameManager gameManager = GameManager.GetComponent<GameManager>();
 		if(other.transform.tag == "Puck")
 		{
-			scoreCount++;
-			GameManager.GetComponent<GameManager>().Reset();
+			gameManager.Reset();
+			gameManager.ScoreCount(power, 1);
 			ResetPuck ();
-			_score.GetComponent<Text> ().text = scoreCount.ToString();
         }
         if (other.transform.tag == "MiniPuck")
         {
-            scoreCount++;
-            _score.GetComponent<Text>().text = scoreCount.ToString();
+            gameManager.ScoreCount(power, 1);
 			Destroy(other.gameObject);
         }
 	}
