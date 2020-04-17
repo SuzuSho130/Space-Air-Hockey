@@ -463,7 +463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchoredPosition: {x: 0, y: -160}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &542464261
@@ -509,8 +509,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: PushButtonStart
+      - m_Target: {fileID: 897915206}
+        m_MethodName: PushButtonTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -595,6 +595,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 23078858417257896, guid: 92980d525440142b1ac5a5c363c8e35d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fd29348b627b7314b9edb058a44f80a2, type: 2}
+    - target: {fileID: 23693845395038974, guid: 92980d525440142b1ac5a5c363c8e35d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fd29348b627b7314b9edb058a44f80a2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92980d525440142b1ac5a5c363c8e35d, type: 3}
 --- !u!1 &583120619
@@ -959,7 +969,7 @@ MonoBehaviour:
   CPUContorollor: {fileID: 2088527367}
   ui_object: {fileID: 608903319}
   result_menu: {fileID: 1739648474}
-  timer: 5
+  timer: 100
 --- !u!4 &897915207
 Transform:
   m_ObjectHideFlags: 0
@@ -1422,6 +1432,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 23166124482109792, guid: 0f84dc4df69b64b0d9009164eb19b926,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86097b6bfd54e484bb95bce9bb484ad7, type: 2}
+    - target: {fileID: 23851599792892998, guid: 0f84dc4df69b64b0d9009164eb19b926,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86097b6bfd54e484bb95bce9bb484ad7, type: 2}
     - target: {fileID: 54115605413562922, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: m_IsKinematic
@@ -1652,7 +1672,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: S T A R T
+  m_Text: T I T L E
 --- !u!222 &1768458621
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class Goal : MonoBehaviour {
 		if(other.transform.tag == "Puck")
 		{
 			gameManager.Reset();
-			gameManager.ScoreCount(power, 1);
+			gameManager.ScoreCount(power, 3);
 			ResetPuck ();
         }
         if (other.transform.tag == "MiniPuck")

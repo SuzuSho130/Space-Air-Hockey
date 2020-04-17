@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/AirHockey/Scenes/MainScene.unity
-    guid: 83c8b219c485b4cda8705342b53ded6d
-  - enabled: 1
     path: Assets/AirHockey/Scenes/TitleScene.unity
     guid: 92497f5f3c2da614ca4dac32c558c169
+  - enabled: 1
+    path: Assets/AirHockey/Scenes/MainScene.unity
+    guid: 83c8b219c485b4cda8705342b53ded6d
   m_configObjects: {}
