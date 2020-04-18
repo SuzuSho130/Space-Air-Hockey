@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class MiniPuckControllor : PuckControllor
 {
-    public float life = 20;
+    private float life = 20.0f;
+
+    public void Init(float max_life)
+    {
+        life = max_life;
+    }
 
     // Update is called once per frame
     void Update()
@@ -13,7 +18,7 @@ public class MiniPuckControllor : PuckControllor
         life -= Time.deltaTime;
         if (life <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

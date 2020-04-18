@@ -38,7 +38,7 @@ public class Goal : MonoBehaviour {
         if (other.transform.tag == "MiniPuck")
         {
             gameManager.ScoreCount(power, 1);
-			Destroy(other.gameObject);
+			other.gameObject.SetActive(false);
         }
 	}
 	

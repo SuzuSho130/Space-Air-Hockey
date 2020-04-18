@@ -6,28 +6,42 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject mini_pack;
     public Vector2 field_size;
     public GameObject CPUContorollor;
     public GameObject ui_object;
     public GameObject result_menu;
+    public GameObject shooting_star_obj;
+    public GameObject satellite_star_obj;
+    public GameObject point_star_obj;
     Text player_score_text;
     Text enemy_score_text;
     Slider timer_slider;
-
     public float timer = 100.0f;
     private int player_score = 0;
     private int enemy_score = 0;
+    public bool shooting_star_mode = true;
+    public bool satellite_mode = true;
+    public bool point_star_mode = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1f;
-        StartCoroutine("ShootingStarTimer");
         player_score_text = ui_object.transform.Find("PlayerScore").GetComponent<Text>();
         enemy_score_text = ui_object.transform.Find("EnemyScore").GetComponent<Text>();
         timer_slider = ui_object.transform.Find("Timer").GetComponent<Slider>();
         timer_slider.maxValue = timer;
+        UseMode();
+    }
+
+    private void UseMode()
+    {
+        if (shooting_star_mode)
+        {
+            shooting_star_obj.SetActive(true);
+            shooting_star_obj.GetComponent<ShootingStar>().Init(field_size);
+        }
     }
 
     void Update()
@@ -50,27 +64,6 @@ public class GameManager : MonoBehaviour
     public void Reset()
     {
         CPUContorollor.GetComponent<CPUControllor>().ResetPosition();
-    }
-
-    IEnumerator ShootingStarTimer()
-    {
-        float timer;
-        while (true)
-        {
-            timer = Random.Range(20.0f, 40.0f);
-            yield return new WaitForSeconds(timer);
-            int count = Random.Range(5, 30);
-            StartCoroutine(ShootingStar(count));
-        }
-    }
-
-    IEnumerator ShootingStar(int count)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            Instantiate(mini_pack, new Vector3(Random.Range(-field_size.x / 2.0f, field_size.x / 2.0f), 10.0f, Random.Range(-field_size.y / 2.0f, field_size.y / 2.0f)), Quaternion.identity);
-            yield return new WaitForSeconds(0.5f);
-        }
     }
 
     public void ScoreCount(bool power, int value)
