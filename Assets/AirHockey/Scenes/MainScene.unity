@@ -1015,8 +1015,8 @@ MonoBehaviour:
   point_star_obj: {fileID: 550964276}
   timer: 100
   shooting_star_mode: 1
-  satellite_mode: 1
-  point_star_mode: 1
+  satellite_mode: 0
+  point_star_mode: 0
 --- !u!4 &897915207
 Transform:
   m_ObjectHideFlags: 0
@@ -2326,6 +2326,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6889377401968826576, guid: f9d65a57dac818640958026f9523d772,
+        type: 3}
+      propertyPath: max_speed
+      value: 1500
+      objectReference: {fileID: 0}
     - target: {fileID: 6889377401968826586, guid: f9d65a57dac818640958026f9523d772,
         type: 3}
       propertyPath: m_Name

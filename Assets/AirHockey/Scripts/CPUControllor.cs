@@ -8,8 +8,8 @@ public class CPUControllor : MonoBehaviour
 {
     private Vector3 init_position;
     private Rigidbody _rb;
-    public float x_speed = 0.5f;  // Strikerの移動速度
-    public float z_speed = 10f;  // Strikerの移動速度
+    [SerializeField] private float x_speed = 0.5f;  // Strikerの移動速度
+    [SerializeField] private float z_speed = 10f;  // Strikerの移動速度
     public GameObject Puck;
 
     void Start()

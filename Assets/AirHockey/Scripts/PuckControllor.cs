@@ -6,10 +6,29 @@ packの動きを制御するスクリプト
 
 public class PuckControllor : MonoBehaviour
 {
+    Rigidbody _rb;
+    [SerializeField] float max_speed = 1000f;
+
+    void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (_rb.velocity.magnitude > max_speed)
+        {
+            SpeedLimit();
+            Debug.Log(_rb.velocity);
+        }
         Move();
+    }
+
+    void SpeedLimit()
+    {
+        var vec = _rb.velocity;
+        _rb.velocity = Vector3.ClampMagnitude(vec, max_speed);
     }
 
     public void Move()
