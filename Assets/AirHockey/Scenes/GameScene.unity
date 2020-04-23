@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &41752199
 Transform:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ Transform:
   - {fileID: 2054277915}
   - {fileID: 1411843916}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: -20, y: -90, z: 0}
 --- !u!114 &41752200
 MonoBehaviour:
@@ -713,7 +713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4868119074866976, guid: 92980d525440142b1ac5a5c363c8e35d, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4868119074866976, guid: 92980d525440142b1ac5a5c363c8e35d, type: 3}
       propertyPath: m_LocalScale.x
@@ -1121,7 +1121,7 @@ Transform:
   - {fileID: 1413964905}
   - {fileID: 550964277}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &941892413 stripped
 ParticleSystem:
@@ -1661,12 +1661,12 @@ PrefabInstance:
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: scroll_speed
-      value: 0.01
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: speed
-      value: 0.6
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
@@ -1678,8 +1678,62 @@ PrefabInstance:
       propertyPath: field_size.y
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
+        type: 3}
+      propertyPath: min_scroll
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
+        type: 3}
+      propertyPath: max_scroll
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f84dc4df69b64b0d9009164eb19b926, type: 3}
+--- !u!1 &1580360332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1580360334}
+  - component: {fileID: 1580360333}
+  m_Layer: 9
+  m_Name: CPUSeacher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!135 &1580360333
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580360332}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1580360334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580360332}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 25}
+  m_LocalScale: {x: 3, y: 1, z: 3}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1657805642
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,7 +2393,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   field_size: {x: 27, y: 60}
   x_speed: 0.9
-  z_speed: 5
+  z_speed: 1
+  max_speed: 50
   Puck: {fileID: 209592450}
 --- !u!1 &2116944346
 GameObject:
@@ -2432,7 +2487,7 @@ Transform:
   m_LocalScale: {x: 30, y: 20, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2145868450
 GameObject:
@@ -2581,7 +2636,7 @@ PrefabInstance:
     - target: {fileID: 4968438452732715155, guid: c721d46e654d4e04698a58973862627b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4968438452732715155, guid: c721d46e654d4e04698a58973862627b,
         type: 3}
@@ -2615,17 +2670,17 @@ PrefabInstance:
     - target: {fileID: 6889377401968826576, guid: f9d65a57dac818640958026f9523d772,
         type: 3}
       propertyPath: max_speed
-      value: 1500
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6889377401968826576, guid: f9d65a57dac818640958026f9523d772,
         type: 3}
       propertyPath: field_size.x
-      value: 280
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 6889377401968826576, guid: f9d65a57dac818640958026f9523d772,
         type: 3}
       propertyPath: field_size.y
-      value: 660
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 6889377401968826586, guid: f9d65a57dac818640958026f9523d772,
         type: 3}

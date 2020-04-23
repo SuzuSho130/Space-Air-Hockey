@@ -16,9 +16,9 @@ public class Goal : MonoBehaviour {
 		_rb = puck.GetComponent<Rigidbody>();
 		/* packを再配置する際にどちらがのゴールかを登録 */
 		if (transform.position.z > 0) {
-			puckPosition = new Vector3 (0, 0, 200);
+			puckPosition = new Vector3 (0, 0, 20);
 		} else {
-			puckPosition = new Vector3 (0, 0, -200);
+			puckPosition = new Vector3 (0, 0, -20);
 		}
 	}
 

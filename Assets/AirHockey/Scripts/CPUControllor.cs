@@ -11,6 +11,7 @@ public class CPUControllor : MonoBehaviour
     [SerializeField] Vector2 field_size;
     [SerializeField] private float x_speed = 0.5f;  // Strikerの移動速度
     [SerializeField] private float z_speed = 10f;  // Strikerの移動速度
+    [SerializeField] private float max_speed = 1f;  // Strikerの移動速度
     public GameObject Puck;
 
     void Start()
@@ -61,6 +62,7 @@ public class CPUControllor : MonoBehaviour
         }
         /*  */
         Vector3 pos = new Vector3(Puck.transform.position.x * x_speed * temp_x, 0f, transform.position.z - temp_z);
+        pos = SpeedLimit(pos);
         _rb.MovePosition(pos);
     }
 
@@ -74,6 +76,7 @@ public class CPUControllor : MonoBehaviour
         }
         /*  */
         Vector3 pos = new Vector3(Puck.transform.position.x * x_speed, 0f, temp_z);
+        pos = SpeedLimit(pos);
         _rb.MovePosition(pos);
     }
 
@@ -87,7 +90,21 @@ public class CPUControllor : MonoBehaviour
         }
         /*  */
         Vector3 pos = new Vector3(Puck.transform.position.x * x_speed, 0f, temp_z);
+        pos = SpeedLimit(pos);
         _rb.MovePosition(pos);  
+    }
+
+    private Vector3 SpeedLimit(Vector3 pos)
+    {
+        Debug.Log(pos.magnitude);
+        if (pos.magnitude > max_speed)
+        {
+            return Vector3.ClampMagnitude(pos, max_speed);
+        }
+        else
+        {
+            return pos;
+        }
     }
 
     /* 台内に収まるようにStrikerの移動を制限 */

@@ -42,7 +42,7 @@ public class ShootingStarControllor : MonoBehaviour
         {
             var mini_puck = _mini_puck_pool.GetMiniPuck();
             mini_puck.GetComponent<MiniPuckControllor>().Init(mini_puck_life);
-            var pos = new Vector3(Random.Range(-_field_size.x / 2.0f, _field_size.x / 2.0f), 10.0f, Random.Range(-_field_size.y / 2.0f, _field_size.y / 2.0f));
+            var pos = new Vector3(Random.Range(-_field_size.x / 2.0f, _field_size.x / 2.0f), 0.0f, Random.Range(-_field_size.y / 2.0f, _field_size.y / 2.0f));
             mini_puck.transform.position = pos;
             yield return new WaitForSeconds(interval);
         }
