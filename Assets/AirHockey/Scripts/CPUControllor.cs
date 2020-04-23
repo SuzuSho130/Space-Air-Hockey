@@ -8,6 +8,7 @@ public class CPUControllor : MonoBehaviour
 {
     private Vector3 init_position;
     private Rigidbody _rb;
+    [SerializeField] Vector2 field_size;
     [SerializeField] private float x_speed = 0.5f;  // Strikerの移動速度
     [SerializeField] private float z_speed = 10f;  // Strikerの移動速度
     public GameObject Puck;
@@ -93,8 +94,8 @@ public class CPUControllor : MonoBehaviour
     private void PositionRestriction()
     {
         Vector3 player_pos = transform.position;
-        player_pos.x = Mathf.Clamp(player_pos.x, -135, 135);
-        player_pos.z = Mathf.Clamp(player_pos.z, 0, 300);
+        player_pos.x = Mathf.Clamp(player_pos.x, -field_size.x / 2f, field_size.x / 2f);
+        player_pos.z = Mathf.Clamp(player_pos.z, 0, field_size.y / 2f);
         transform.position = player_pos;
     }
 

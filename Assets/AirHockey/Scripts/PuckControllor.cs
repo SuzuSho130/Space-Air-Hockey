@@ -8,6 +8,7 @@ public class PuckControllor : MonoBehaviour
 {
     Rigidbody _rb;
     [SerializeField] float max_speed = 1000f;
+    [SerializeField] protected Vector2 field_size;
 
     void Start()
     {
@@ -20,7 +21,6 @@ public class PuckControllor : MonoBehaviour
         if (_rb.velocity.magnitude > max_speed)
         {
             SpeedLimit();
-            Debug.Log(_rb.velocity);
         }
         Move();
     }
@@ -34,8 +34,8 @@ public class PuckControllor : MonoBehaviour
     public void Move()
     {
         Vector3 player_pos = transform.position;
-        player_pos.x = Mathf.Clamp(player_pos.x, -140, 140);
-        player_pos.z = Mathf.Clamp(player_pos.z, -330, 330);
+        player_pos.x = Mathf.Clamp(player_pos.x, -field_size.x / 2f, field_size.x / 2f);
+        player_pos.z = Mathf.Clamp(player_pos.z, -field_size.y / 2, field_size.y / 2f);
         player_pos.y = 0;
         transform.position = player_pos;
     }

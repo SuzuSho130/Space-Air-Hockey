@@ -9,6 +9,7 @@ public class MiniPuckControllor : PuckControllor
     public void Init(float max_life)
     {
         life = max_life;
+        field_size = new Vector2 (280f, 660f);
     }
 
     // Update is called once per frame
