@@ -8,7 +8,7 @@ public class ShootingStar : MonoBehaviour
     GameObject _star;
     public GameObject _burst_particle;
     Rigidbody _rb;
-    Vector3 _pool_pos = new Vector3(1000, 1000, 1000);
+    Vector3 _pool_pos = new Vector3(1000f, 1000f, 1000f);
     [SerializeField] private float _speed;
 
     void Start()

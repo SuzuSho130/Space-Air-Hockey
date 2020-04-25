@@ -9,6 +9,7 @@ public class ObjectPool : MonoBehaviour
 
     public void CreatePool(GameObject obj, int max_count)
     {
+        Debug.Log(max_count);
         _obj = obj;
         _obj_list = new List<GameObject>();
         for (int i = 0; i < max_count; i++)
@@ -39,7 +40,7 @@ public class ObjectPool : MonoBehaviour
     
     private GameObject CreateNewObject()
     {
-        var new_object = Instantiate(_obj);
+        var new_object = Instantiate(_obj, transform.position, Quaternion.identity);
 
         return new_object;
 

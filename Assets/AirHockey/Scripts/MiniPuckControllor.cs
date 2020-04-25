@@ -6,7 +6,7 @@ public class MiniPuckControllor : PuckControllor
 {
     private float max_life = 20.0f;
     private float life;
-    public Vector3 _pool_pos = new Vector3(1000, 1000, 1000);
+    public Vector3 _pool_pos = new Vector3(1000f, 1000f, 1000f);
 
     public void Init(Vector3 position)
     {
