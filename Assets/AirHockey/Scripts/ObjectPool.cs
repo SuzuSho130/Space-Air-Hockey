@@ -13,13 +13,13 @@ public class ObjectPool : MonoBehaviour
         _obj_list = new List<GameObject>();
         for (int i = 0; i < max_count; i++)
         {
-            var new_mini_puck = CreateNewMiniPuck();
-            new_mini_puck.SetActive(false);
-            _obj_list.Add(new_mini_puck);
+            var new_object = CreateNewObject();
+            new_object.SetActive(false);
+            _obj_list.Add(new_object);
         }
     }
 
-    public GameObject GetMiniPuck()
+    public GameObject GetObject()
     {
         foreach (var obj in _obj_list)
         {
@@ -30,18 +30,18 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        var new_mini_puck = CreateNewMiniPuck();
-        new_mini_puck.SetActive(true);
-        _obj_list.Add(new_mini_puck);
+        var new_object = CreateNewObject();
+        new_object.SetActive(true);
+        _obj_list.Add(new_object);
 
-        return new_mini_puck;
+        return new_object;
     }
     
-    private GameObject CreateNewMiniPuck()
+    private GameObject CreateNewObject()
     {
-        var new_mini_puck = Instantiate(_obj);
+        var new_object = Instantiate(_obj);
 
-        return new_mini_puck;
+        return new_object;
 
     }
 }

@@ -96,7 +96,6 @@ public class CPUControllor : MonoBehaviour
 
     private Vector3 SpeedLimit(Vector3 pos)
     {
-        Debug.Log(pos.magnitude);
         if (pos.magnitude > max_speed)
         {
             return Vector3.ClampMagnitude(pos, max_speed);

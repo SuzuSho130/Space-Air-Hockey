@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class MiniPuckControllor : PuckControllor
 {
-    private float life = 20.0f;
+    private float max_life = 20.0f;
+    private float life;
+    public Vector3 _pool_pos = new Vector3(1000, 1000, 1000);
 
-    public void Init(float max_life)
+    public void Init(Vector3 position)
     {
+        transform.position = position;
         life = max_life;
         field_size = new Vector2 (280f, 660f);
     }
@@ -19,7 +22,14 @@ public class MiniPuckControllor : PuckControllor
         life -= Time.deltaTime;
         if (life <= 0)
         {
-            gameObject.SetActive(false);
+            Reset();
         }
+    }
+
+    public void Reset()
+    {
+        transform.position = _pool_pos;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameObject.SetActive(false);
     }
 }

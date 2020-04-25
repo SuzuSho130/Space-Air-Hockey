@@ -124,5 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e1a5bbcdef48e4fae38349f1fdedd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit_effect: {fileID: 3429476479204985331, guid: 454979f51a05f13429d5641bc202d5f3,
+    type: 3}
   max_speed: 100
   field_size: {x: 28, y: 66}
+  _pool_pos: {x: 0, y: 0, z: 0}

@@ -6,7 +6,8 @@ packの動きを制御するスクリプト
 
 public class PuckControllor : MonoBehaviour
 {
-    Rigidbody _rb;
+    protected Rigidbody _rb;
+    public GameObject hit_effect;
     [SerializeField] float max_speed = 1000f;
     [SerializeField] protected Vector2 field_size;
 
@@ -38,5 +39,14 @@ public class PuckControllor : MonoBehaviour
         player_pos.z = Mathf.Clamp(player_pos.z, -field_size.y / 2, field_size.y / 2f);
         player_pos.y = 0;
         transform.position = player_pos;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        // Vector3 hit_pos;
+        foreach(ContactPoint contact in other.contacts)
+        {
+            Instantiate(hit_effect, contact.point, Quaternion.identity);
+        }
     }
 }

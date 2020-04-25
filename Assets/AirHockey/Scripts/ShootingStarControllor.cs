@@ -6,13 +6,14 @@ using UnityEngine;
 public class ShootingStarControllor : MonoBehaviour
 {
 
+    public GameObject _star_prefab;
     public GameObject _mini_puck_prefab;
     [SerializeField] private float frequency = 30.0f;
     [SerializeField] private float interval = 0.5f;
     [SerializeField] private int mini_puck_max = 50;
     [SerializeField] private int mini_puck_min = 20;
-    [SerializeField] private float mini_puck_life = 20f;
     private ObjectPool _mini_puck_pool;
+    private ObjectPool _shooting_star_pool;
     private float timer;
     private Vector2 _field_size;
 
@@ -21,6 +22,8 @@ public class ShootingStarControllor : MonoBehaviour
     {
         _field_size = field_size;
         frequency = Random.Range(frequency - 10f, frequency + 10f);
+        _shooting_star_pool = GetComponent<ObjectPool>();
+        _shooting_star_pool.CreatePool(_star_prefab, mini_puck_max);
         _mini_puck_pool = GetComponent<ObjectPool>();
         _mini_puck_pool.CreatePool(_mini_puck_prefab, mini_puck_max);
     }
@@ -40,10 +43,11 @@ public class ShootingStarControllor : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            var mini_puck = _mini_puck_pool.GetMiniPuck();
-            mini_puck.GetComponent<MiniPuckControllor>().Init(mini_puck_life);
-            var pos = new Vector3(Random.Range(-_field_size.x / 2.0f, _field_size.x / 2.0f), 0.0f, Random.Range(-_field_size.y / 2.0f, _field_size.y / 2.0f));
-            mini_puck.transform.position = pos;
+            var _shooting_star = _shooting_star_pool.GetObject();
+            var _mini_puck = _mini_puck_pool.GetObject();
+            _shooting_star.GetComponent<ShootingStar>().Init(0.1f, _mini_puck);
+            var pos = new Vector3(Random.Range(-_field_size.x / 2.0f - 40, _field_size.x / 2.0f - 40), 40.0f, Random.Range(-_field_size.y / 2.0f, _field_size.y / 2.0f));
+            _shooting_star.transform.position = pos;
             yield return new WaitForSeconds(interval);
         }
     }

@@ -5,33 +5,52 @@ using UnityEngine;
 public class ShootingStar : MonoBehaviour
 {
 
-    public GameObject _mini_puck_prefab;
+    GameObject _star;
+    public GameObject _burst_particle;
     Rigidbody _rb;
-    private Vector2 _field_size;
-    [SerializeField] private Vector3 _target_pos;
+    Vector3 _pool_pos = new Vector3(1000, 1000, 1000);
     [SerializeField] private float _speed;
 
-    void Start(){Init(new Vector2(24, 50), 2.0f);}
-
-    // Start is called before the first frame update
-    public void Init(Vector2 field_size, float speed)
+    void Start()
     {
         _rb = GetComponent<Rigidbody>();
+    }
+
+    // Start is called before the first frame update
+    public void Init(float speed, GameObject star)
+    {
         _speed = speed;
-        _field_size = field_size;
-        _target_pos = new Vector3(Random.Range(-_field_size.x / 2.0f, _field_size.x / 2.0f), 0.0f, Random.Range(-_field_size.y / 2.0f, _field_size.y / 2.0f));
+        _star = star;
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        if (transform.position.y<=1)
+        {
+            Birth();
+        }
     }
 
     private void Move()
     {
-        Vector3 direction = (_target_pos - transform.position).normalized;
-        Debug.Log(direction);
-        _rb.AddForce(direction * _speed, ForceMode.Force);
+        var pos = transform.position;
+        pos.x += _speed;
+        pos.y -= _speed;
+        _rb.MovePosition(pos);
+    }
+
+    private void Birth()
+    {
+        Instantiate(_burst_particle, transform.position, Quaternion.identity);
+        _star.GetComponent<MiniPuckControllor>().Init(transform.position);
+        Reset();
+    }
+
+    public void Reset()
+    {
+        transform.position = _pool_pos;
+        gameObject.SetActive(false);
     }
 }
