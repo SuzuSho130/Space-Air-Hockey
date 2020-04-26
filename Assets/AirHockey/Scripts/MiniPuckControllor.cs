@@ -8,9 +8,9 @@ public class MiniPuckControllor : PuckControllor
     private float life;
     public Vector3 _pool_pos = new Vector3(1000f, 1000f, 1000f);
 
-    public void Init(Vector3 position)
+    public void Init()
     {
-        transform.position = position;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
         life = max_life;
         field_size = new Vector2 (280f, 660f);
     }

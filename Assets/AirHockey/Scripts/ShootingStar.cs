@@ -5,11 +5,10 @@ using UnityEngine;
 public class ShootingStar : MonoBehaviour
 {
 
-    GameObject _star;
     public GameObject _burst_particle;
     Rigidbody _rb;
     Vector3 _pool_pos = new Vector3(1000f, 1000f, 1000f);
-    [SerializeField] private float _speed;
+    [SerializeField] private float _speed = 0.1f;
 
     void Start()
     {
@@ -17,10 +16,8 @@ public class ShootingStar : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    public void Init(float speed, GameObject star)
+    public void Init()
     {
-        _speed = speed;
-        _star = star;
     }
 
     // Update is called once per frame
@@ -29,7 +26,7 @@ public class ShootingStar : MonoBehaviour
         Move();
         if (transform.position.y<=1)
         {
-            Birth();
+            Burst();
         }
     }
 
@@ -41,10 +38,10 @@ public class ShootingStar : MonoBehaviour
         _rb.MovePosition(pos);
     }
 
-    private void Birth()
+    private void Burst()
     {
         Instantiate(_burst_particle, transform.position, Quaternion.identity);
-        _star.GetComponent<MiniPuckControllor>().Init(transform.position);
+        GameObject.Find("ShootingStarManager").GetComponent<ShootingStarManager>().Birth(transform.position);
         Reset();
     }
 

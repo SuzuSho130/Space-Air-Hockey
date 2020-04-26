@@ -139,10 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e0cd278db54854ab7f5ca161db9e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _star: {fileID: 3072137842812418940, guid: 3e6b286955c32f34b805f5947969339b, type: 3}
   _burst_particle: {fileID: 5389432080473258540, guid: ba430170d0f25164ea6e957779c1e7a3,
     type: 3}
-  _speed: 0
+  _speed: 0.05
 --- !u!54 &4944559244219219025
 Rigidbody:
   m_ObjectHideFlags: 0
