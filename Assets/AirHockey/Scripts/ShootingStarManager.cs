@@ -16,15 +16,23 @@ public class ShootingStarManager : MonoBehaviour
     [SerializeField] private int _max_puck = 50;
     [SerializeField] private int _max_point = 10;
 
+    [SerializeField] private int _max_meteor = 60;
+    [SerializeField] private int _min_meteor = 30;
+
     private Vector3 _field_size;
     private float timer;
 
-    [SerializeField] private float frequency = 2f;
+    [SerializeField] private float _shooting_star_frequency = 10f;
+    [SerializeField] private float _meteor_shower_frequency = 10f;
+    private float shooting_star_interval = 0;
+    private float meteor_shower_interval = 0;
 
-    // Start is called before the first frame update
+    // Start is cated before the first frame update
 
     void Start()
     {
+        shooting_star_interval += _shooting_star_frequency * Random.Range(0.7f, 1.3f);
+        meteor_shower_interval += _meteor_shower_frequency * Random.Range(0.7f, 1.3f);
         Init(new Vector3(28, 0, 68));
     }
 
@@ -45,16 +53,20 @@ public class ShootingStarManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= frequency)
+        if (timer >= shooting_star_interval)
         {
-            timer = 0;
+            shooting_star_interval += _shooting_star_frequency * Random.Range(0.7f, 1.3f);
             ShootStar();
+        }
+        if (timer >= meteor_shower_interval)
+        {
+            meteor_shower_interval += _meteor_shower_frequency * Random.Range(0.7f, 1.3f);
+            StartCoroutine(MeteorShower(Random.Range(_min_meteor, _max_meteor)));
         }
     }
 
     private void ShootStar()
     {
-        Debug.Log("Shoot");
         var shooting_star = _shooting_star_pool.GetObject();
         var pos = new Vector3(Random.Range(-_field_size.x / 2.0f - 40, _field_size.x / 2.0f - 40), 40.0f, Random.Range(-_field_size.z / 2.0f + 10, _field_size.z / 2.0f - 10));
         shooting_star.transform.position = pos;
@@ -66,5 +78,16 @@ public class ShootingStarManager : MonoBehaviour
         var puck = _puck_pool.GetObject();
         puck.transform.position = pos;
         puck.GetComponent<MiniPuckControllor>().Init();
+    }
+
+    private IEnumerator MeteorShower(int count)
+    {
+        float interval;
+        for (int i = 0; i < count; i++)
+        {
+            ShootStar();
+            interval = Random.Range(0.05f, 0.2f);
+            yield return new WaitForSeconds(interval);
+        }
     }
 }

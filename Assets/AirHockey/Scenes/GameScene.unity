@@ -1002,7 +1002,10 @@ MonoBehaviour:
   _max_shooting_star: 60
   _max_puck: 50
   _max_point: 10
-  frequency: 10
+  _max_meteor: 60
+  _min_meteor: 30
+  _shooting_star_frequency: 10
+  _meteor_shower_frequency: 40
 --- !u!1 &637915099
 GameObject:
   m_ObjectHideFlags: 0
