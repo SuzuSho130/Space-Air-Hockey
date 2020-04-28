@@ -17,6 +17,6 @@ public class Title : MonoBehaviour
 
     public void PushButtonStart()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("GameScene");
     }
 }

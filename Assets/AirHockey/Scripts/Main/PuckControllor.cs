@@ -16,6 +16,16 @@ public class PuckControllor : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
+    public Vector3 GetSpeed()
+    {
+        return _rb.velocity;
+    }
+
+    public float GetMaxSpeed()
+    {
+        return max_speed;
+    }
+
     // Update is called once per frame
     void Update()
     {

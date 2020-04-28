@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class GameManager : MonoBehaviour
     public bool shooting_star_mode = true;
     public bool satellite_mode = true;
     public bool point_star_mode = true;
-
 
     // Start is called before the first frame update
     void Start()
