@@ -27,7 +27,7 @@ public class PuckControllor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_rb.velocity.magnitude > max_speed)
         {

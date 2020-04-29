@@ -12,6 +12,7 @@ public class StrikerController: MonoBehaviour {
     [SerializeField] float min_scroll = 0.01f;
     [SerializeField] float max_scroll = 1.0f;
     [SerializeField] float speed = 0.5f;			// strikerの移動速度
+	[SerializeField] float limit = 1f;
 	private Vector3 startPostion;		// strikerの初期位置
 	private Vector3 startMousePosition;	// 最初のマウスの位置
 	private Rigidbody _rb;
@@ -31,14 +32,34 @@ public class StrikerController: MonoBehaviour {
 		}
 		float scroll = Input.GetAxis ("Mouse ScrollWheel");
 		ChangeSpeed (scroll);
+	}
 
-		var mousePosition = Input.mousePosition;
-		Move (mousePosition);
+	void FixedUpdate ()
+    {
+        var mousePosition = Input.mousePosition;
+        Move(mousePosition);
 	}
 
 
     /* マウスの移動位置からstrikerの移動位置を決定 */
     private void Move(Vector3 currentMousePosition) {
+        Vector3 position = (currentMousePosition - startMousePosition);
+        position.z = position.y - 25.0f / speed;
+		// _rb.velocity = position * speed;
+		// var pos = Vector3.ClampMagnitude(position * speed - transform.position, limit);
+		// _rb.MovePosition(pos);
+		_rb.MovePosition(position * speed);
+		if(_rb.velocity.magnitude > limit) {
+            _rb.velocity = _rb.velocity.normalized;
+        }
+        /* 台内に収まるようにStrikerの移動を制限 */
+        Vector3 player_pos = transform.position;
+		player_pos.x = Mathf.Clamp(player_pos.x, -field_size.x / 2f, field_size.x / 2f);
+		player_pos.z = Mathf.Clamp(player_pos.z, -field_size.y / 2, 0);
+		transform.position = player_pos;
+	}
+
+    private void Move2(Vector3 currentMousePosition) {
         Vector3 position = (currentMousePosition - startMousePosition);
         position.z = position.y - 25.0f / speed;
 		_rb.MovePosition(position * speed);
