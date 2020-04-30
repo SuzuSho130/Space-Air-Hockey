@@ -17,10 +17,15 @@ public class StrikerController: MonoBehaviour {
 	private Vector3 startMousePosition;	// 最初のマウスの位置
 	private Rigidbody _rb;
 
+	private Vector3 prevMousePos;
+
 	void Start () {
+        prevMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
 		/* strikerとマウスの初期値を計算 */
 		startPostion = transform.position;
 		startMousePosition = Input.mousePosition;
+		prevMousePos = Input.mousePosition;
 		_rb = GetComponent<Rigidbody> ();
 	}
 
@@ -28,7 +33,7 @@ public class StrikerController: MonoBehaviour {
 	void Update () 
 	{
 		if (Input.GetMouseButtonDown (1)) {	// マウスの初期位置を現在の場所に更新
-			startMousePosition = Input.mousePosition;
+			transform.position = new Vector3(0, 0, -25);
 		}
 		float scroll = Input.GetAxis ("Mouse ScrollWheel");
 		ChangeSpeed (scroll);
@@ -43,15 +48,12 @@ public class StrikerController: MonoBehaviour {
 
     /* マウスの移動位置からstrikerの移動位置を決定 */
     private void Move(Vector3 currentMousePosition) {
-        Vector3 position = (currentMousePosition - startMousePosition);
-        position.z = position.y - 25.0f / speed;
-		// _rb.velocity = position * speed;
-		// var pos = Vector3.ClampMagnitude(position * speed - transform.position, limit);
-		// _rb.MovePosition(pos);
-		_rb.MovePosition(position * speed);
-		if(_rb.velocity.magnitude > limit) {
-            _rb.velocity = _rb.velocity.normalized;
-        }
+        Vector3 position = (currentMousePosition - prevMousePos);
+        position.z = position.y;
+		var pos = Vector3.ClampMagnitude(position / speed, limit);
+		_rb.MovePosition(transform.position + pos * Time.deltaTime);
+		prevMousePos = currentMousePosition;
+
         /* 台内に収まるようにStrikerの移動を制限 */
         Vector3 player_pos = transform.position;
 		player_pos.x = Mathf.Clamp(player_pos.x, -field_size.x / 2f, field_size.x / 2f);
@@ -59,29 +61,15 @@ public class StrikerController: MonoBehaviour {
 		transform.position = player_pos;
 	}
 
-    private void Move2(Vector3 currentMousePosition) {
-        Vector3 position = (currentMousePosition - startMousePosition);
-        position.z = position.y - 25.0f / speed;
-		_rb.MovePosition(position * speed);
-		if(_rb.velocity.magnitude > 1) {
-            _rb.velocity = _rb.velocity.normalized;
-        }
-        /* 台内に収まるようにStrikerの移動を制限 */
-        Vector3 player_pos = transform.position;
-		player_pos.x = Mathf.Clamp(player_pos.x, -field_size.x / 2f, field_size.x / 2f);
-		player_pos.z = Mathf.Clamp(player_pos.z, -field_size.y / 2, 0);
-		transform.position = player_pos;
-	}
-	
 	/*
 	strikerの移動速度を変更する関数
 	引数:マウスのスクロール変化量
 	*/
 	private void ChangeSpeed(float scroll) {
 		if (scroll < 0) {
-			speed -= scroll_speed;
-		} else if (scroll > 0) {
 			speed += scroll_speed;
+		} else if (scroll > 0) {
+			speed -= scroll_speed;
 		}
 		speed = Mathf.Clamp (speed, min_scroll, max_scroll);
 	}

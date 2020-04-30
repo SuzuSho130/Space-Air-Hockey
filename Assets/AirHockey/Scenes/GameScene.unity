@@ -1919,12 +1919,12 @@ PrefabInstance:
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: scroll_speed
-      value: 0.001
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: speed
-      value: 0.04
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
@@ -1939,17 +1939,17 @@ PrefabInstance:
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: min_scroll
-      value: 0.001
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: max_scroll
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: limit
-      value: 0.1
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f84dc4df69b64b0d9009164eb19b926, type: 3}
@@ -2835,6 +2835,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6889377401968826587, guid: f9d65a57dac818640958026f9523d772,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 87a430fc3e1294727a13ddd7b70ebcb4,
+        type: 2}
     - target: {fileID: 6889377401968826591, guid: f9d65a57dac818640958026f9523d772,
         type: 3}
       propertyPath: m_LocalPosition.x
