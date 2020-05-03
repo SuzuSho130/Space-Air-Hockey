@@ -12,7 +12,10 @@ public class CPUControllor : MonoBehaviour
     [SerializeField] private float x_speed = 0.5f;  // Strikerの移動速度
     [SerializeField] private float z_speed = 10f;  // Strikerの移動速度
     [SerializeField] private float max_speed = 1f;  // Strikerの移動速度
+    [SerializeField] float sp = 100f;
     public GameObject Puck;
+    GameObject[] mini_puck_list;
+    int[] count_mini_puck = {0, 0, 0, 0, 0, 0};
 
     void Start()
     {
@@ -23,7 +26,18 @@ public class CPUControllor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StateTransition();
+        // StateTransition();
+        // _rb.velocity = new Vector3(0, 0, -sp);
+        mini_puck_list = GameObject.FindGameObjectsWithTag("MiniPuck");
+        Debug.Log(mini_puck_list.Length);
+    }
+
+    private void CountMiniPuck()
+    {
+        foreach (var mini_puck in mini_puck_list)
+        {
+
+        }
     }
 
     private void StateTransition()
@@ -61,9 +75,10 @@ public class CPUControllor : MonoBehaviour
             temp_z = z_speed / 4;   
         }
         /*  */
-        Vector3 pos = new Vector3(Puck.transform.position.x * x_speed * temp_x, 0f, transform.position.z - temp_z);
+        // Vector3 pos = new Vector3(Puck.transform.position.x * x_speed * temp_x, 0f, transform.position.z - temp_z);
+        Vector3 pos = new Vector3(Puck.transform.position.x, 0f, transform.position.z);
         pos = SpeedLimit(pos);
-        _rb.MovePosition(pos);
+        _rb.MovePosition(transform.position + pos * Time.deltaTime);
     }
 
     private void DeffenceMove()
@@ -77,7 +92,7 @@ public class CPUControllor : MonoBehaviour
         /*  */
         Vector3 pos = new Vector3(Puck.transform.position.x * x_speed, 0f, temp_z);
         pos = SpeedLimit(pos);
-        _rb.MovePosition(pos);
+        _rb.MovePosition(transform.position + pos * Time.deltaTime);
     }
 
     private void ReturnMove()
@@ -91,7 +106,7 @@ public class CPUControllor : MonoBehaviour
         /*  */
         Vector3 pos = new Vector3(Puck.transform.position.x * x_speed, 0f, temp_z);
         pos = SpeedLimit(pos);
-        _rb.MovePosition(pos);  
+        _rb.MovePosition(transform.position + pos * Time.deltaTime);
     }
 
     private Vector3 SpeedLimit(Vector3 pos)
@@ -118,5 +133,14 @@ public class CPUControllor : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = init_position;
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Puck")
+        {
+            sp = 0;
+            _rb.velocity = Vector3.zero;
+        }
     }
 }

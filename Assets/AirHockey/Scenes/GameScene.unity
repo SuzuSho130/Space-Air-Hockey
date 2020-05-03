@@ -849,6 +849,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fd29348b627b7314b9edb058a44f80a2, type: 2}
+    - target: {fileID: 54442225999611170, guid: 92980d525440142b1ac5a5c363c8e35d,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92980d525440142b1ac5a5c363c8e35d, type: 3}
 --- !u!1 &583120619
@@ -1924,7 +1929,7 @@ PrefabInstance:
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: speed
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
@@ -1944,7 +1949,7 @@ PrefabInstance:
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
       propertyPath: max_scroll
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114421871612298638, guid: 0f84dc4df69b64b0d9009164eb19b926,
         type: 3}
@@ -2600,7 +2605,8 @@ MonoBehaviour:
   field_size: {x: 27, y: 60}
   x_speed: 0.9
   z_speed: 1
-  max_speed: 50
+  max_speed: 200
+  sp: 50
   Puck: {fileID: 209592450}
 --- !u!1 &2116944346
 GameObject:
