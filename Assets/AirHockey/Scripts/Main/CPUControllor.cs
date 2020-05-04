@@ -9,10 +9,9 @@ public class CPUControllor : MonoBehaviour
     private Vector3 init_position;
     private Rigidbody _rb;
     [SerializeField] Vector2 field_size;
-    [SerializeField] private float x_speed = 0.5f;  // Strikerの移動速度
+    [SerializeField] private float x_speed = 10f;  // Strikerの移動速度
     [SerializeField] private float z_speed = 10f;  // Strikerの移動速度
-    [SerializeField] private float max_speed = 1f;  // Strikerの移動速度
-    [SerializeField] float sp = 100f;
+    [SerializeField] float speed = 300f;
     public GameObject Puck;
     GameObject[] mini_puck_list;
     int[] count_mini_puck = {0, 0, 0, 0, 0, 0};
@@ -26,10 +25,10 @@ public class CPUControllor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // StateTransition();
+        StateTransition();
         // _rb.velocity = new Vector3(0, 0, -sp);
-        mini_puck_list = GameObject.FindGameObjectsWithTag("MiniPuck");
-        Debug.Log(mini_puck_list.Length);
+        // mini_puck_list = GameObject.FindGameObjectsWithTag("MiniPuck");
+        // Debug.Log(mini_puck_list.Length);
     }
 
     private void CountMiniPuck()
@@ -62,63 +61,50 @@ public class CPUControllor : MonoBehaviour
 
     private void AttackMove()
     {
-        float temp_x;
-        float temp_z;
-        if (Puck.transform.position.z - transform.position.z < 100)
-        {
-            temp_x = 1.0f;
-            temp_z = z_speed;
-        }
-        else
-        {
-            temp_x = 2.0f;
-            temp_z = z_speed / 4;   
-        }
+        float v_x = 0f;
+        float v_z = 0f;
+        if (Puck.transform.position.z - transform.position.z < 10) v_z = -z_speed;
+        else v_z = -(z_speed / 4);
+        if (Puck.transform.position.x - transform.position.x > 0) v_x = x_speed;
+        else if (Puck.transform.position.x - transform.position.x < 0) v_x = -x_speed;
         /*  */
-        // Vector3 pos = new Vector3(Puck.transform.position.x * x_speed * temp_x, 0f, transform.position.z - temp_z);
-        Vector3 pos = new Vector3(Puck.transform.position.x, 0f, transform.position.z);
-        pos = SpeedLimit(pos);
-        _rb.MovePosition(transform.position + pos * Time.deltaTime);
+        _rb.velocity = new Vector3(v_x, 0f, v_z) * speed * Time.deltaTime;
     }
 
     private void DeffenceMove()
     {
-        float temp_z = transform.position.z;
-        temp_z += z_speed;
-        if (temp_z > init_position.z)
+        float v_x = 0f;
+        float v_z = 0f;
+        if (Puck.transform.position.x - transform.position.x > 0) v_x = x_speed;
+        else if (Puck.transform.position.x - transform.position.x < 0) v_x = -x_speed;
+        if (transform.position.z < init_position.z)
         {
-            temp_z = init_position.z;
+            v_z = z_speed;
+        }
+        else
+        {
+            v_z = -z_speed;
         }
         /*  */
-        Vector3 pos = new Vector3(Puck.transform.position.x * x_speed, 0f, temp_z);
-        pos = SpeedLimit(pos);
-        _rb.MovePosition(transform.position + pos * Time.deltaTime);
+        _rb.velocity = new Vector3(v_x, 0f, v_z) * speed * Time.deltaTime;
     }
 
     private void ReturnMove()
     {
-        float temp_z = transform.position.z;
-        temp_z += z_speed/2;
-        if (temp_z > init_position.z)
+        float v_x = 0f;
+        float v_z = 0f;
+        if (Puck.transform.position.x - transform.position.x > 0) v_x = x_speed;
+        else if (Puck.transform.position.x - transform.position.x < 0) v_x = -x_speed;
+        if (transform.position.z < init_position.z)
         {
-            temp_z = init_position.z;
-        }
-        /*  */
-        Vector3 pos = new Vector3(Puck.transform.position.x * x_speed, 0f, temp_z);
-        pos = SpeedLimit(pos);
-        _rb.MovePosition(transform.position + pos * Time.deltaTime);
-    }
-
-    private Vector3 SpeedLimit(Vector3 pos)
-    {
-        if (pos.magnitude > max_speed)
-        {
-            return Vector3.ClampMagnitude(pos, max_speed);
+            v_z = z_speed;
         }
         else
         {
-            return pos;
+            v_z = -z_speed;
         }
+        /*  */
+        _rb.velocity = new Vector3(v_x, 0f, v_z) * speed * Time.deltaTime;
     }
 
     /* 台内に収まるようにStrikerの移動を制限 */
@@ -133,14 +119,5 @@ public class CPUControllor : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = init_position;
-    }
-
-    public void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Puck")
-        {
-            sp = 0;
-            _rb.velocity = Vector3.zero;
-        }
     }
 }
