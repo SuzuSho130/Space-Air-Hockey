@@ -6,6 +6,7 @@
 
 public class CPUControllor : MonoBehaviour
 {
+    
     private Vector3 init_position;
     private Rigidbody _rb;
     [SerializeField] Vector2 field_size;
