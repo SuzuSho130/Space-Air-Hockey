@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762f4b3eb4aa14e22938867b081dc5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 1
+  side: 0
   puck: {fileID: 209592450}
   GameManager: {fileID: 897915205}
 --- !u!65 &56879483
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762f4b3eb4aa14e22938867b081dc5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 0
+  side: 1
   puck: {fileID: 209592450}
   GameManager: {fileID: 897915205}
 --- !u!65 &177884940
@@ -789,7 +789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1276677523819532, guid: 92980d525440142b1ac5a5c363c8e35d, type: 3}
       propertyPath: m_TagString
-      value: Striker
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1276677523819532, guid: 92980d525440142b1ac5a5c363c8e35d, type: 3}
       propertyPath: m_Layer
@@ -1847,7 +1847,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1258078082669540, guid: 0f84dc4df69b64b0d9009164eb19b926, type: 3}
       propertyPath: m_TagString
-      value: Striker
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1258078082669540, guid: 0f84dc4df69b64b0d9009164eb19b926, type: 3}
       propertyPath: m_Layer
@@ -2561,7 +2561,7 @@ MonoBehaviour:
   field_size: {x: 27, y: 60}
   x_speed: 10
   z_speed: 10
-  speed: 300
+  speed: 400
   Puck: {fileID: 209592450}
 --- !u!1 &2116944346
 GameObject:

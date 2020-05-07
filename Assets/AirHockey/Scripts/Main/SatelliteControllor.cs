@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SatelliteControllor : MonoBehaviour
 {
-    private bool _power;
+    private bool _side;
 
     // Start is called before the first frame update
-    public void Init(bool power)
+    public void Init(bool side)
     {
-        _power = power;
+        _side = side;
     }
 
     // Update is called once per frame

@@ -66,9 +66,9 @@ public class GameManager : MonoBehaviour
         CPUContorollor.GetComponent<CPUControllor>().ResetPosition();
     }
 
-    public void ScoreCount(bool power, int value)
+    public void ScoreCount(bool side, int value)
     {
-        if (power)
+        if (side)
         {
             player_score += value;
             player_score_text.text = player_score.ToString();

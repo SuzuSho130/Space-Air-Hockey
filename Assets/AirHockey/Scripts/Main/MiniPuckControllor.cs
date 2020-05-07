@@ -10,7 +10,8 @@ public class MiniPuckControllor : PuckControllor
 
     public void Init()
     {
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _rb = GetComponent<Rigidbody>();
+        _rb.velocity = Vector3.zero;
         life = max_life;
         field_size = new Vector2 (280f, 660f);
     }

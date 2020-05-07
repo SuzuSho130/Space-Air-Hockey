@@ -10,6 +10,7 @@ public class PuckControllor : MonoBehaviour
     public GameObject hit_effect;
     [SerializeField] float max_speed = 1000f;
     [SerializeField] protected Vector2 field_size;
+    public bool side;
 
     void Start()
     {
@@ -53,10 +54,23 @@ public class PuckControllor : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.tag=="Player")
+        {
+            side = true;
+        }
+        else if (other.gameObject.tag=="Enemy")
+        {
+            side = false;
+        }
         // Vector3 hit_pos;
         foreach(ContactPoint contact in other.contacts)
         {
             Instantiate(hit_effect, contact.point, Quaternion.identity);
         }
+    }
+
+    public float GetDirectionZ()
+    {
+        return _rb.velocity.z;
     }
 }

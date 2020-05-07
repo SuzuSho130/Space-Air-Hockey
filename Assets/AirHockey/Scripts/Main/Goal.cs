@@ -7,7 +7,7 @@ packがゴールに入って場合にスコア計算を行うスクリプト
 public class Goal : MonoBehaviour {
 
 
-    public bool power;
+    public bool side;
     public GameObject puck;
     private Rigidbody _rb;
     private Vector3 puckPosition;
@@ -37,12 +37,12 @@ public class Goal : MonoBehaviour {
         if (other.transform.tag == "Puck")
         {
             gameManager.Reset();
-            gameManager.ScoreCount(power, 3);
+            gameManager.ScoreCount(side, 3);
             ResetPuck();
         }
         if (other.transform.tag == "MiniPuck")
         {
-            gameManager.ScoreCount(power, 1);
+            gameManager.ScoreCount(side, 1);
             other.gameObject.SetActive(false);
         }
     }
