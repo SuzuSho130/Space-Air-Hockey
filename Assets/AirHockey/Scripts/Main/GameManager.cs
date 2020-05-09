@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
     {
         if (shooting_star_mode)
         {
-            // shooting_star_obj.SetActive(true);
-            // shooting_star_obj.GetComponent<ShootingStarControllor>().Init(field_size);
+            shooting_star_obj.SetActive(true);
+            shooting_star_obj.GetComponent<ShootingStarManager>().Init(field_size);
         }
     }
 

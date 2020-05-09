@@ -56,11 +56,11 @@ public class PuckControllor : MonoBehaviour
     {
         if (other.gameObject.tag=="Player")
         {
-            side = true;
+            side = false;
         }
         else if (other.gameObject.tag=="Enemy")
         {
-            side = false;
+            side = true;
         }
         // Vector3 hit_pos;
         foreach(ContactPoint contact in other.contacts)

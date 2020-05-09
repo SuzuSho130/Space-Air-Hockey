@@ -16,6 +16,9 @@ public class ShootingStarManager : MonoBehaviour
     [SerializeField] private int _max_puck = 50;
     [SerializeField] private int _max_point = 10;
 
+    [SerializeField] private float _puck_rate = 0f;
+    [SerializeField] private float _point_rate = 70f;
+
     [SerializeField] private int _max_meteor = 60;
     [SerializeField] private int _min_meteor = 30;
 
@@ -75,9 +78,32 @@ public class ShootingStarManager : MonoBehaviour
 
     public void Birth(Vector3 pos)
     {
-        var puck = _puck_pool.GetObject();
-        puck.transform.position = pos;
-        puck.GetComponent<MiniPuckControllor>().Init();
+        float select = Random.Range(0, 100);
+        if (select >=_point_rate)
+        {
+            var point = _point_pool.GetObject();
+            point.transform.position = pos;
+            float point_value = Random.Range(0, 10);
+            if (point_value >= 9)
+            {
+                point.GetComponent<PointStar>().Init(10, Color.red);
+            }
+            else if (point_value >= 6)
+            {
+                point.GetComponent<PointStar>().Init(3, Color.yellow);
+            }
+            else
+            {
+                point.GetComponent<PointStar>().Init(1, Color.blue);
+            }
+
+        }
+        else if (select >= _puck_rate)
+        {
+            var puck = _puck_pool.GetObject();
+            puck.transform.position = pos;
+            puck.GetComponent<MiniPuckControllor>().Init();
+        }
     }
 
     private IEnumerator MeteorShower(int count)
