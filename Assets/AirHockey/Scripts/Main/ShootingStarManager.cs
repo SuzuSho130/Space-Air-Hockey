@@ -8,60 +8,105 @@ public class ShootingStarManager : MonoBehaviour
     private ObjectPool _puck_pool;
     private ObjectPool _point_pool;
 
-    public GameObject _shooting_star;
-    public GameObject _puck;
-    public GameObject _point;
+    public GameObject _shooting_star_prefab;
+    public GameObject _puck_prefab;
+    public GameObject _point_prefab;
+
+    private bool use_shootingstar;
+    private bool use_meteorshower;
+    private bool use_minipuck;
+    private bool use_point;
+    private bool use_satellite;
+
+    private float _shooting_star_frequency;
+    private float _meteor_shower_frequency;
+    private float _puck_rate = 0f;
+    private float _point_rate = 0f;
+    private float _satellite_rate = 0f;
+
+    private float _sum_rate = 0f;
 
     [SerializeField] private int _max_shooting_star = 60;
     [SerializeField] private int _max_puck = 50;
     [SerializeField] private int _max_point = 10;
 
-    [SerializeField] private float _puck_rate = 0f;
-    [SerializeField] private float _point_rate = 70f;
-
     [SerializeField] private int _max_meteor = 60;
     [SerializeField] private int _min_meteor = 30;
 
-    private Vector3 _field_size;
+    private Vector3 _field_size = new Vector3(28, 0, 68);
     private float timer;
 
-    [SerializeField] private float _shooting_star_frequency = 10f;
-    [SerializeField] private float _meteor_shower_frequency = 10f;
     private float shooting_star_interval = 0;
     private float meteor_shower_interval = 0;
 
-    // Start is cated before the first frame update
-
     void Start()
     {
-        shooting_star_interval += _shooting_star_frequency * Random.Range(0.7f, 1.3f);
-        meteor_shower_interval += _meteor_shower_frequency * Random.Range(0.7f, 1.3f);
-        Init(new Vector3(28, 0, 68));
+        UseMode();
     }
 
-    public void Init(Vector3 field_size)
+    private void UseMode()
     {
-        _field_size = field_size;
-
-        _shooting_star_pool = transform.Find("ShootingStarPool").GetComponent<ObjectPool>();
-        _puck_pool = transform.Find("PuckPool").GetComponent<ObjectPool>();
-        _point_pool = transform.Find("PointPool").GetComponent<ObjectPool>();
-
-        _shooting_star_pool.CreatePool(_shooting_star, _max_shooting_star);
-        _puck_pool.CreatePool(_puck, _max_puck);
-        _point_pool.CreatePool(_point, _max_point);
+        use_shootingstar = Setting.use_shootingstar;
+        use_meteorshower = Setting.use_meteorshower;
+        use_minipuck = Setting.use_minipuck;
+        use_point = Setting.use_point;
+        use_satellite = Setting.use_satellite;
+        if (use_shootingstar)
+        {
+            _shooting_star_frequency = Setting.shootingstar_frequency;
+            shooting_star_interval +=  _shooting_star_frequency * Random.Range(0.7f, 1.3f);
+        }
+        if (use_meteorshower)
+        {
+            _meteor_shower_frequency = Setting.meteorshower_frequency;
+            meteor_shower_interval += _meteor_shower_frequency * Random.Range(0.7f, 1.3f);
+        }
+        if (use_shootingstar || use_meteorshower)
+        {
+            _shooting_star_pool = transform.Find("ShootingStarPool").GetComponent<ObjectPool>();
+            _shooting_star_pool.CreatePool(_shooting_star_prefab, _max_shooting_star);
+        }
+        if (use_minipuck && (use_shootingstar || use_meteorshower))
+        {
+            _puck_rate = Setting.minipuck_rate;
+            _puck_pool = transform.Find("PuckPool").GetComponent<ObjectPool>();
+            _puck_pool.CreatePool(_puck_prefab, _max_puck);
+        }
+        if (use_point && (use_shootingstar || use_meteorshower))
+        {
+            _point_rate = Setting.point_rate;
+            _point_pool = transform.Find("PointPool").GetComponent<ObjectPool>();
+            _point_pool.CreatePool(_point_prefab, _max_point);
+        }
+        if (use_satellite && (use_shootingstar || use_meteorshower))
+        {
+            _satellite_rate = Setting.satellite_rate;
+        }
+        _sum_rate = _puck_rate + _point_rate + _satellite_rate;
+        if(use_minipuck)
+        {
+            _puck_rate += _point_rate + _satellite_rate;
+        }
+        if(use_point)
+        {
+            _point_rate += _satellite_rate;
+        }
+        Debug.Log(_sum_rate);
+        Debug.Log(_puck_rate);
+        Debug.Log(_point_rate);
+        Debug.Log(_satellite_rate);
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= shooting_star_interval)
+        if (timer >= shooting_star_interval && use_shootingstar)
         {
             shooting_star_interval += _shooting_star_frequency * Random.Range(0.7f, 1.3f);
             ShootStar();
         }
-        if (timer >= meteor_shower_interval)
+        if (timer >= meteor_shower_interval && use_meteorshower)
         {
             meteor_shower_interval += _meteor_shower_frequency * Random.Range(0.7f, 1.3f);
             StartCoroutine(MeteorShower(Random.Range(_min_meteor, _max_meteor)));
@@ -78,8 +123,12 @@ public class ShootingStarManager : MonoBehaviour
 
     public void Birth(Vector3 pos)
     {
-        float select = Random.Range(0, 100);
-        if (select >=_point_rate)
+        float select = Random.Range(0, _sum_rate);
+        if (select <= _satellite_rate)
+        {
+            Debug.Log("satellite");
+        }
+        else if (select <= _point_rate)
         {
             var point = _point_pool.GetObject();
             point.transform.position = pos;
@@ -98,11 +147,14 @@ public class ShootingStarManager : MonoBehaviour
             }
 
         }
-        else if (select >= _puck_rate)
+        else if (select <= _puck_rate)
         {
             var puck = _puck_pool.GetObject();
             puck.transform.position = pos;
             puck.GetComponent<MiniPuckControllor>().Init();
+        }
+        else
+        {
         }
     }
 

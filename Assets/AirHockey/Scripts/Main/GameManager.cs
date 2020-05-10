@@ -11,18 +11,12 @@ public class GameManager : MonoBehaviour
     public GameObject CPUContorollor;
     public GameObject ui_object;
     public GameObject result_menu;
-    public GameObject shooting_star_obj;
-    public GameObject satellite_star_obj;
-    public GameObject point_star_obj;
     Text player_score_text;
     Text enemy_score_text;
     Slider timer_slider;
     public float timer = 100.0f;
     private int player_score = 0;
     private int enemy_score = 0;
-    public bool shooting_star_mode = true;
-    public bool satellite_mode = true;
-    public bool point_star_mode = true;
 
     // Start is called before the first frame update
     void Start()
@@ -32,16 +26,6 @@ public class GameManager : MonoBehaviour
         enemy_score_text = ui_object.transform.Find("EnemyScore").GetComponent<Text>();
         timer_slider = ui_object.transform.Find("Timer").GetComponent<Slider>();
         timer_slider.maxValue = timer;
-        UseMode();
-    }
-
-    private void UseMode()
-    {
-        if (shooting_star_mode)
-        {
-            shooting_star_obj.SetActive(true);
-            shooting_star_obj.GetComponent<ShootingStarManager>().Init(field_size);
-        }
     }
 
     void Update()
