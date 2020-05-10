@@ -7,10 +7,12 @@ public class ShootingStarManager : MonoBehaviour
     private ObjectPool _shooting_star_pool;
     private ObjectPool _puck_pool;
     private ObjectPool _point_pool;
+    private ObjectPool _satellite_pool;
 
     public GameObject _shooting_star_prefab;
     public GameObject _puck_prefab;
     public GameObject _point_prefab;
+    public GameObject _satellite_prefab;
 
     private bool use_shootingstar;
     private bool use_meteorshower;
@@ -27,8 +29,7 @@ public class ShootingStarManager : MonoBehaviour
     private float _sum_rate = 0f;
 
     [SerializeField] private int _max_shooting_star = 60;
-    [SerializeField] private int _max_puck = 50;
-    [SerializeField] private int _max_point = 10;
+    [SerializeField] private int _max_count = 40;
 
     [SerializeField] private int _max_meteor = 60;
     [SerializeField] private int _min_meteor = 30;
@@ -70,17 +71,19 @@ public class ShootingStarManager : MonoBehaviour
         {
             _puck_rate = Setting.minipuck_rate;
             _puck_pool = transform.Find("PuckPool").GetComponent<ObjectPool>();
-            _puck_pool.CreatePool(_puck_prefab, _max_puck);
+            _puck_pool.CreatePool(_puck_prefab, _max_count);
         }
         if (use_point && (use_shootingstar || use_meteorshower))
         {
             _point_rate = Setting.point_rate;
             _point_pool = transform.Find("PointPool").GetComponent<ObjectPool>();
-            _point_pool.CreatePool(_point_prefab, _max_point);
+            _point_pool.CreatePool(_point_prefab, _max_count);
         }
         if (use_satellite && (use_shootingstar || use_meteorshower))
         {
             _satellite_rate = Setting.satellite_rate;
+            _satellite_pool = transform.Find("SatellitePool").GetComponent<ObjectPool>();
+            _satellite_pool.CreatePool(_satellite_prefab, _max_count);
         }
         _sum_rate = _puck_rate + _point_rate + _satellite_rate;
         if(use_minipuck)
@@ -91,10 +94,6 @@ public class ShootingStarManager : MonoBehaviour
         {
             _point_rate += _satellite_rate;
         }
-        Debug.Log(_sum_rate);
-        Debug.Log(_puck_rate);
-        Debug.Log(_point_rate);
-        Debug.Log(_satellite_rate);
     }
 
     // Update is called once per frame
@@ -126,7 +125,9 @@ public class ShootingStarManager : MonoBehaviour
         float select = Random.Range(0, _sum_rate);
         if (select <= _satellite_rate)
         {
-            Debug.Log("satellite");
+            var satellite = _satellite_pool.GetObject();
+            satellite.transform.position = pos;
+            satellite.GetComponent<SatelliteControllor>().Init();
         }
         else if (select <= _point_rate)
         {

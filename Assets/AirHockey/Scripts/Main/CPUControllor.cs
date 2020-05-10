@@ -30,14 +30,6 @@ public class CPUControllor : MonoBehaviour
         StateTransition();
     }
 
-    private void CountMiniPuck()
-    {
-        foreach (var mini_puck in mini_puck_list)
-        {
-
-        }
-    }
-
     private void StateTransition()
     {
         if (Puck.transform.position.z <= 0)
