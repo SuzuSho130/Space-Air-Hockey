@@ -12,11 +12,11 @@ public class Setting : MonoBehaviour
     public static bool use_point = true;
     public static bool use_satellite = true;
     
-    public static float shootingstar_frequency = 8f;
+    public static float shootingstar_frequency = 10f;
     public static float meteorshower_frequency = 30f;
-    public static float minipuck_rate = 70f;
-    public static float point_rate = 30f;
-    public static float satellite_rate = 30f;
+    public static float minipuck_rate = 65f;
+    public static float point_rate = 25f;
+    public static float satellite_rate = 10f;
 
     public Toggle use_shootingstar_toggle;
     public Toggle use_meteorshower_toggle;
@@ -48,10 +48,26 @@ public class Setting : MonoBehaviour
     public void SetUsePoint() { use_point = use_point_toggle.isOn; }
     public void SetUseSatellite() { use_satellite = use_satellite_toggle.isOn; }
 
-    public void SetShootingStarFrequency() { shootingstar_frequency = shootingstar_frequency_slider.value; }
-    public void SetMeteorShowerFrequency() { meteorshower_frequency = meteorshower_frequency_slider.value; }
+    public void SetShootingStarFrequency() { shootingstar_frequency = 100 - shootingstar_frequency_slider.value; }
+    public void SetMeteorShowerFrequency() { meteorshower_frequency = 100 - meteorshower_frequency_slider.value; }
     public void SetMinipuckRate() { minipuck_rate = minipuck_rate_slider.value; }
     public void SetPointRate() { point_rate = point_rate_slider.value; }
     public void SetSatelliteRate() { satellite_rate = satellite_rate_slider.value; }
+
     public void PushButtonReturn() { UISetting.SetActive(false); }
+
+    public void PusuButtonDefault()
+    {
+        use_shootingstar_toggle.isOn = true;
+        use_meteorshower_toggle.isOn = true;
+        use_minipuck_toggle.isOn = true;
+        use_point_toggle.isOn = true;
+        use_satellite_toggle.isOn = true;
+
+        shootingstar_frequency_slider.value = 90f;
+        meteorshower_frequency_slider.value = 70f;
+        minipuck_rate_slider.value = 65f;
+        point_rate_slider.value = 25f;
+        satellite_rate_slider.value = 10f;
+    }
 }
