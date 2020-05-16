@@ -13,7 +13,7 @@ public class MiniPuckControllor : PuckControllor
         _rb = GetComponent<Rigidbody>();
         _rb.velocity = Vector3.zero;
         life = max_life;
-        field_size = new Vector2 (280f, 660f);
+        field_size = new Vector2 (28f, 66f);
     }
 
     // Update is called once per frame

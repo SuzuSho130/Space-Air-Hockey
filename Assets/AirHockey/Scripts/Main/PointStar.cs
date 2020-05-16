@@ -10,13 +10,15 @@ public class PointStar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(0f, 0.5f, 0f);
+        transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time, 1), transform.position.z);
     }
 
     public void Init(int point, Color col)
     {
         this.point = point;
-        gameObject.GetComponent<Renderer>().material.color = col;
+        gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().materials[1].color = col;
+        // GetComponentInChildren<Renderer>().material.color = col;
     }
 
     public void OnTriggerEnter(Collider other)
