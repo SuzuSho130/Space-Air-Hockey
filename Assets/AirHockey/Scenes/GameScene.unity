@@ -183,7 +183,7 @@ Transform:
   m_LocalScale: {x: 18, y: 12, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &177884937
 GameObject:
@@ -247,7 +247,7 @@ Transform:
   m_LocalScale: {x: 18, y: 12, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191802219
 GameObject:
@@ -461,7 +461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4664214472879030, guid: 0fb518ecf97144fe0b91eab531d59be4, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4664214472879030, guid: 0fb518ecf97144fe0b91eab531d59be4, type: 3}
       propertyPath: m_LocalScale.x
@@ -782,7 +782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4868119074866976, guid: 92980d525440142b1ac5a5c363c8e35d, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4868119074866976, guid: 92980d525440142b1ac5a5c363c8e35d, type: 3}
       propertyPath: m_LocalScale.x
@@ -1054,7 +1054,7 @@ MonoBehaviour:
     type: 3}
   _point_prefab: {fileID: 1458000463953015207, guid: 5a5020eb0d366ea4aa985f58ec595c33,
     type: 3}
-  _satellite_prefab: {fileID: 4292131460145298287, guid: 1b83977ebec5b5142805c36c54f8a9d2,
+  _satellite_prefab: {fileID: 3111874986411287625, guid: 0f691d74abf9bce4b9f0dce6049cc30b,
     type: 3}
   _max_shooting_star: 60
   _max_count: 40
@@ -1759,7 +1759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4780927134511004, guid: 0f84dc4df69b64b0d9009164eb19b926, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4780927134511004, guid: 0f84dc4df69b64b0d9009164eb19b926, type: 3}
       propertyPath: m_LocalScale.x
@@ -2364,7 +2364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2088527367 stripped
 GameObject:
@@ -2389,6 +2389,7 @@ MonoBehaviour:
   z_speed: 10
   speed: 400
   Puck: {fileID: 209592450}
+  has_satellite: 0
 --- !u!1 &2145868450
 GameObject:
   m_ObjectHideFlags: 0

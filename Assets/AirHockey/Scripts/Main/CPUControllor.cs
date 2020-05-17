@@ -17,6 +17,8 @@ public class CPUControllor : MonoBehaviour
     private GameObject target;
     GameObject[] mini_puck_list;
 
+    public bool has_satellite = false;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();

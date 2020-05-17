@@ -17,15 +17,17 @@ public class StrikerController: MonoBehaviour {
 	private Vector3 startMousePosition;	// 最初のマウスの位置
 	private Rigidbody _rb;
 
-	private Vector3 prevMousePos;
+	private Vector3 prev_mouse_pos;
+
+	public bool has_satellite = false;
 
 	void Start () {
-        prevMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        prev_mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		/* strikerとマウスの初期値を計算 */
 		startPostion = transform.position;
 		startMousePosition = Input.mousePosition;
-		prevMousePos = Input.mousePosition;
+		prev_mouse_pos = Input.mousePosition;
 		_rb = GetComponent<Rigidbody> ();
 	}
 
@@ -48,11 +50,11 @@ public class StrikerController: MonoBehaviour {
 
     /* マウスの移動位置からstrikerの移動位置を決定 */
     private void Move(Vector3 currentMousePosition) {
-        Vector3 position = (currentMousePosition - prevMousePos);
+        Vector3 position = (currentMousePosition - prev_mouse_pos);
         position.z = position.y;
 		var pos = Vector3.ClampMagnitude(position / speed, limit);
 		_rb.MovePosition(transform.position + pos * Time.deltaTime);
-		prevMousePos = currentMousePosition;
+		prev_mouse_pos = currentMousePosition;
 
         /* 台内に収まるようにStrikerの移動を制限 */
         Vector3 player_pos = transform.position;

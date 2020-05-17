@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SatelliteControllor : MonoBehaviour
 {
@@ -12,69 +10,124 @@ public class SatelliteControllor : MonoBehaviour
     private bool _side;
     private bool free = true;
     private int direction;
+    private float limit = 10f;
+    private bool attack = true;
+    private float life = 10f;
+
+    private Vector3 init_pos;
 
     public Vector3 _pool_pos = new Vector3(1000f, 1000f, 1000f);
 
     public SatelliteSearcher satellite_seacher;
 
-    public void Start()
-    {
-        Init();
-    }
-
     // Start is called before the first frame update
     public void Init()
     {
+        GetComponent<Collider>().isTrigger = true;
+        life = 10f;
         _rb = GetComponent<Rigidbody>();
     }
 
     public void Hit(bool side)
     {
+        GetComponent<Collider>().isTrigger = false;
         _rb.velocity = Vector3.zero;
         _side = side;
         if (_side)
         {
-            direction = -1;
-            transform.Rotate(new Vector3(0f, 180f, 0f));
-            transform.position = new Vector3(Random.Range(-15f, 15f), 1f, Random.Range(0f, 30f));
+            CPUControllor c = GameObject.Find("StrikerCPU").GetComponent<CPUControllor>();
+            if (c.has_satellite)
+            {
+                Debug.Log("E");
+                life += 10f;
+                Leave();
+            }
+            else
+            {
+                c.has_satellite = true;
+                direction = -1;
+                transform.Rotate(new Vector3(0f, 180f, 0f));
+                transform.position = new Vector3(0f, 0f, 25);
+                init_pos = transform.position;
+            }
         }
         else
         {
-            direction = 1;
-            transform.position = new Vector3(Random.Range(-15f, 15f), 1f, Random.Range(-30f, 0f));
+            StrikerController s = GameObject.Find("StrikerPlayer").GetComponent<StrikerController>();
+            if (s.has_satellite)
+            {
+                Debug.Log("Player");
+                life += 10f;
+                Leave();
+            }
+            else
+            {
+                s.has_satellite = true;
+                direction = 1;
+                transform.position = new Vector3(0f, 0f, -25f);
+                init_pos = transform.position;
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (satellite_seacher == null || free)
+        if (!free)
         {
+            if ((transform.position - init_pos).magnitude < 3f)
+            {
+                _rb.velocity = Vector3.zero;
+                attack = true;
+            }
+            if ((transform.position - init_pos).magnitude > limit)
+            {
+                attack = false;
+            }
+            if (satellite_seacher != null && satellite_seacher.puck_list.Count > 0)
+            {
+                if (attack)
+                {
+                    AttackMove(satellite_seacher.puck_list[0].position);
+                }
+            }
+            if (!attack)
+            {
+                ReturnMove();
+            }
+            life -= Time.deltaTime;
         }
-        else if (satellite_seacher.puck_list.Count > 0)
-        {
-            Move(satellite_seacher.puck_list[0].position);
-        }
-        float current_z = transform.position.z;
-        if (current_z * direction > 0 && free != true)
+        if (life <= 0f)
         {
             Reset();
         }
     }
 
-    private void Move(Vector3 target_position)
+    private void AttackMove(Vector3 target_position)
     {
         if (target_position.x > transform.position.x)
         {
-            _rb.velocity = new Vector3(v_x, 0f, v_z * direction) * Time.deltaTime;
+            _rb.velocity = new Vector3(v_x, 0f, v_z * direction);
         }
         else
         {
-            _rb.velocity = new Vector3(-v_x, 0f, v_z * direction) * Time.deltaTime;
+            _rb.velocity = new Vector3(-v_x, 0f, v_z * direction);
         }
     }
 
-    public void OnCollisionEnter(Collision other)
+    private void ReturnMove()
+    {
+        if (init_pos.x > transform.position.x)
+        {
+            _rb.velocity = new Vector3(v_x, 0f, -v_z * direction);
+        }
+        else
+        {
+            _rb.velocity = new Vector3(-v_x, 0f, -v_z * direction);
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Puck" || other.gameObject.tag == "MiniPuck")
         {
@@ -83,14 +136,23 @@ public class SatelliteControllor : MonoBehaviour
                 free = false;
                 Hit(other.gameObject.GetComponent<PuckControllor>().side);
             }
-            else
-            {
-                Reset();
-            }
         }
     }
 
     private void Reset()
+    {
+        Leave();
+        if (_side)
+        {
+            GameObject.Find("StrikerCPU").GetComponent<CPUControllor>().has_satellite = false;
+        }
+        else
+        {
+            GameObject.Find("StrikerPlayer").GetComponent<StrikerController>().has_satellite = false;
+        }
+    }
+
+    private void Leave()
     {
         free = true;
         transform.position = _pool_pos;
