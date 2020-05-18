@@ -1,5 +1,6 @@
 # Space Air Hockey
 コンピューターと対戦するエアホッケーのゲームです。
+様々なアイテムがあるため、単純なパックの打ち合いだけでなくアイテムを利用した戦い方が求められます。（設定でオフにできます）
 
 # Image＆Application
 https://suzusho130.github.io/WebGLForUnity/.
