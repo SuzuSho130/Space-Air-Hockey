@@ -3,7 +3,7 @@
 様々なアイテムがあるため、単純なパックの打ち合いだけでなくアイテムを利用した戦い方が求められます。（設定でオフにできます）
 
 # Image＆Application
-<img src="***https://github.com/SuzuSho130/Space-Air-Hockey/blob/Application/Images/Image.png" width=600>
+<img src="https://github.com/SuzuSho130/Space-Air-Hockey/blob/Application/Images/Image.png" width=600>
 https://suzusho130.github.io/WebGLForUnity/.
 
 # Features
