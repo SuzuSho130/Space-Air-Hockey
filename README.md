@@ -4,7 +4,7 @@
 
 # Image＆Application
 <img src="https://github.com/SuzuSho130/Space-Air-Hockey/blob/Application/Images/Image.png" width=600>
-https://suzusho130.github.io/WebGLForUnity/.
+https://suzusho130.github.io/WebGLForUnity/SpaceAirHockey/
 
 # Features
 基本はパックの打ち合いなどの基本動作は物理エンジンで実現しています。
